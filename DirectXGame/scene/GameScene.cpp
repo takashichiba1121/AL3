@@ -58,7 +58,7 @@ void GameScene::Update() {
 	std::string strDebug = std::string("Value:") +
 		std::to_string(value_);
 	//デバッグテキストの表示
-	debugText_->Print(strDebug, 50, 50, 1.0f);
+	debugText_->Print(strDebug, 50, 100, 1.0f);
 }
 
 void GameScene::Draw() {
@@ -72,7 +72,6 @@ void GameScene::Draw() {
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
-	 sprite_->Draw();
 	/// </summary>
 
 	// スプライト描画後処理
@@ -101,7 +100,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
-
+	sprite_->Draw();
 	// デバッグテキストの描画
 	debugText_->DrawAll(commandList);
 	//
