@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 ﻿  コード生成しています。
   Previous IPDB and IOBJ mismatch, fall back to full compilation.
   All 2156 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+=======
+﻿  main.cpp
+  GameScene.cpp
+  コード生成しています。
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 2048 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+>>>>>>> 1932a8d1eadf95ffc26f709e68489f38522c3c44
   コード生成が終了しました。
   DirectXGame.vcxproj -> C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\DirectXGame.exe
