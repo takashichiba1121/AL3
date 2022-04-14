@@ -1,2 +1,5 @@
-﻿  GameScene.cpp
+﻿  main.cpp
+  GameScene.cpp
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\k021g1120\二年次\AL3\DirectXGame\x64\Debug\DirectXGame.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   DirectXGame.vcxproj -> C:\k021g1120\二年次\AL3\DirectXGame\x64\Debug\DirectXGame.exe
