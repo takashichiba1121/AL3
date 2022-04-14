@@ -6,8 +6,7 @@ using namespace DirectX;
 
 GameScene::GameScene() {}
 
-GameScene::~GameScene() {
-}
+GameScene::~GameScene() {}
 
 void GameScene::Initialize() {
 
