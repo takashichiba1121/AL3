@@ -65,6 +65,19 @@ class GameScene {
 	int32_t value_ = 0;
 	//カメラ上方向の角度
 	float viewAngle = 0.0f;
+public:
+	//パーツID
+	enum PartId {
+		Root,//大元
+		Spine,//脊椎
+		Chest,//胸
+		Head,//頭
+		ArmL,//左腕
+		ArmR,//右腕
+		Hip,//尻
+		LegL,//左足
+		LegR,//右足
+	};
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
