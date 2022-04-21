@@ -1,29 +1,8 @@
-﻿  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\ObjPS.cso
-  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\ObjVS.cso
-  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\ShapePS.cso
-  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\ShapeVS.cso
-  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\SpritePS.cso
-  compilation object save succeeded; see C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\SpriteVS.cso
-  DebugText.cpp
-  Sprite.cpp
-  DebugCamera.cpp
-  LightGroup.cpp
-  Material.cpp
-  Mesh.cpp
-  Model.cpp
-  ViewProjection.cpp
-  WorldTransform.cpp
-  Audio.cpp
-  AxisIndicator.cpp
-  DirectXCommon.cpp
-  TextureManager.cpp
-  WinApp.cpp
-  Input.cpp
-  main.cpp
+﻿  main.cpp
   GameScene.cpp
   コード生成しています。
-  500 of 2080 functions (24.0%) were compiled, the rest were copied from previous compilation.
-    20 functions were new in current compilation
-    29 functions had inline decision re-evaluated but remain unchanged
+  8 of 2070 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    15 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   DirectXGame.vcxproj -> C:\k021g1120\二年次\AL3\DirectXGame\x64\Release\DirectXGame.exe
