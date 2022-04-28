@@ -1,0 +1,15 @@
+﻿  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\ObjPS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\ObjVS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\PrimitivePS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\PrimitiveVS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\ShapePS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\ShapeVS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\SpritePS.cso
+  compilation object save succeeded; see C:\KamataEngine\DirectXGame\x64\Debug\SpriteVS.cso
+  DirectXCommon.cpp
+  TextureManager.cpp
+  WinApp.cpp
+  main.cpp
+  GameScene.cpp
+  コードを生成中...
+  DirectXGame.vcxproj -> C:\KamataEngine\DirectXGame\x64\Debug\DirectXGame.exe
