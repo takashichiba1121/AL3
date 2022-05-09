@@ -19,7 +19,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	debugText_ = DebugText::GetInstance();
 	//ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("mario.jpg");
+	textureHandle_ = TextureManager::Load("Resources/mario.jpg");
 
 	//スプライトの生成
 	sprite_ = Sprite::Create(textureHandle_, { 100,50 });
