@@ -1,2 +1,25 @@
-﻿  GameScene.cpp
-  DirectXGame.vcxproj -> C:\k021g1120\二年次\AL3\DirectXGame\x64\Debug\DirectXGame.exe
+﻿  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\ObjPS.cso
+  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\ObjVS.cso
+  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\ShapePS.cso
+  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\ShapeVS.cso
+  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\SpritePS.cso
+  compilation object save succeeded; see C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\SpriteVS.cso
+  DebugText.cpp
+  Sprite.cpp
+  DebugCamera.cpp
+  LightGroup.cpp
+  Material.cpp
+  Mesh.cpp
+  Model.cpp
+  ViewProjection.cpp
+  WorldTransform.cpp
+  Audio.cpp
+  AxisIndicator.cpp
+  DirectXCommon.cpp
+  TextureManager.cpp
+  WinApp.cpp
+  Input.cpp
+  main.cpp
+  GameScene.cpp
+  コードを生成中...
+  DirectXGame.vcxproj -> C:\KamataEngine202204011\KamataEngine\DirectXGame\x64\Debug\DirectXGame.exe
