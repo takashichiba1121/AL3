@@ -1,6 +1,8 @@
 ﻿#include "GameScene.h"
 #include "TextureManager.h"
+#include"AxisIndicator.h"
 #include <cassert>
+#include<cmath>
 
 GameScene::GameScene() {}
 
@@ -29,36 +31,71 @@ void GameScene::Initialize() {
 
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(1280,720);
+
+	//軸方向表示の表示を有効にする
+	AxisIndicator::GetInstance()->SetVisible(true);
+	//軸方向表示が参照するビュープロダクションを指定する（アドレス渡し）
+	AxisIndicator::GetInstance()->SetTargetViewProjection(&debugCamera_->GetViewProjection());
+	
 	//X,Y,Z 方向のスケーリングを設定
 	worldTransform_.scale_={ 2,2,2 };
+	worldTransform_.rotation_ = { PI / 4,PI / 4,PI/4 };
+	worldTransform_.translation_ = { 10,10,10 };
 	//スケーリング行列を宣言
-	Matrix4 matScale;
-	matScale.m[0][0] = worldTransform_.scale_.x;
-	matScale.m[0][1] = 0;
-	matScale.m[0][2] = 0;
-	matScale.m[0][3] = 0;
-
-	matScale.m[1][0] = 0;
-	matScale.m[1][1] = worldTransform_.scale_.y;
-	matScale.m[1][2] = 0;
-	matScale.m[1][3] = 0;
-
-	matScale.m[2][0] = 0;
-	matScale.m[2][1] = 0;
-	matScale.m[2][2] = worldTransform_.scale_.z;
-	matScale.m[2][3] = 0;
-
-	matScale.m[3][0] = 0;
-	matScale.m[3][1] = 0;
-	matScale.m[3][2] = 0;
-	matScale.m[3][3] = 1;
+	Matrix4 matScale=
+	{
+		worldTransform_.scale_.x,0,0,0,
+		0,worldTransform_.scale_.y,0,0,
+		0,0,worldTransform_.scale_.z,0,
+		0,0,0,1,
+	};
+	Matrix4 matRotZ =
+	{
+		1,0,0,0,
+		0,cos(worldTransform_.rotation_.z),sin(worldTransform_.rotation_.z),0,
+		0,-sin(worldTransform_.rotation_.z),cos(worldTransform_.rotation_.z),0,
+		0,0,0,1,
+	};
+	Matrix4 matRotY =
+	{
+		cos(worldTransform_.rotation_.y),0,-sin(worldTransform_.rotation_.z),0,
+		0,1,0,0,
+		sin(worldTransform_.rotation_.y),0,cos(worldTransform_.rotation_.z),0,
+		0,0,0,1,
+	};
+	Matrix4 matRotX =
+	{
+		cos(worldTransform_.rotation_.x),sin(worldTransform_.rotation_.x),0,0,
+		-sin(worldTransform_.rotation_.x),cos(worldTransform_.rotation_.x),0,0,
+		0,0,1,0,
+		0,0,0,1,
+	};
+	Matrix4 matRot =
+	{
+		1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		0,0,0,1,
+	};
+	Matrix4  matTrams = MathUtility::Matrix4Identity();
+	matTrams =
+	{
+		1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		worldTransform_.translation_.x,worldTransform_.translation_.y,worldTransform_.translation_.z,1,
+	};
 
 	worldTransform_.matWorld_.m[0][0] = 1;
 	worldTransform_.matWorld_.m[1][1] = 1;
 	worldTransform_.matWorld_.m[2][2] = 1;
 	worldTransform_.matWorld_.m[3][3] = 1;
 	worldTransform_.matWorld_ *= matScale;
-
+	matRot*= matRotX;
+	matRot *= matRotY;
+	matRot *= matRotZ;
+	worldTransform_.matWorld_ *= matRot;
+	worldTransform_.matWorld_ *= matTrams;
 	//行列の転送
 	worldTransform_.TransferMatrix();
 }

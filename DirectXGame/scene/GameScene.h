@@ -60,6 +60,7 @@ class GameScene {
 	ViewProjection viewProjection_;
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
+	float PI = 3.1415927;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
