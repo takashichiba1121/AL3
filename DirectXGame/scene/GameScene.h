@@ -55,12 +55,18 @@ class GameScene {
 	Model* model_ = nullptr;
 
 	//ワールドトランスフォーム
-	WorldTransform worldTransform_;
+	WorldTransform worldTransforms_[100];
 	//ビュープロダクション
 	ViewProjection viewProjection_;
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
+
+	//円周率
 	float PI = 3.1415927;
+
+	//カメラ上方向の角度
+	float viewAngle = 0.0f;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
