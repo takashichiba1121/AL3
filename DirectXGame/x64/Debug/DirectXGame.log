@@ -1,2 +1,9 @@
 ﻿  GameScene.cpp
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.h(65,11): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(191,37): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(194,37): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(198,37): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(201,37): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(213,32): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\k021g1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(216,32): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
   DirectXGame.vcxproj -> C:\k021g1120\二年次\AL3\3D\DirectXGame\x64\Debug\DirectXGame.exe
