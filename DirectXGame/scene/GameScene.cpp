@@ -16,6 +16,7 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 
+	debugCamera_ = new DebugCamera(1280, 720);
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
@@ -94,12 +95,21 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 #ifdef _DEBUG
-	if (input_->TriggerKey(DIK_RETURN))
+	if (input_->TriggerKey(DIK_W))
 	{
-		isDebugCameraActive_ = -isDebugCameraActive_;
+		if (isDebugCameraActive_) { isDebugCameraActive_ = false; }
+		else { isDebugCameraActive_ = true; }
 	}
 #endif
+	if (isDebugCameraActive_){
+		debugCamera_->Update();
+		viewProjection_ = debugCamera_->GetViewProjection();
+	}else{
+		viewProjection_.Initialize();
+	}
 	player_->Update();
+	debugText_->SetPos(10, 30);
+	debugText_->Printf("%d", isDebugCameraActive_);
 }
 
 void GameScene::Draw() {
