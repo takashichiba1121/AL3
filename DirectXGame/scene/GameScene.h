@@ -10,6 +10,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include"DebugCamera.h"
+#include "PLayer.h"
 
 /// <summary>
 /// ゲームシーン
@@ -48,21 +49,18 @@ class GameScene {
 	Audio* audio_ = nullptr;
 	DebugText* debugText_ = nullptr;
 
-	//テクスチャハンドル
-	uint32_t textureHandle_ = 0;
-
-	//3Dモデル
-	Model* model_ = nullptr;
-
-	//ワールドトランスフォーム
-	WorldTransform worldTransforms_[100];
-	//ビュープロダクション
+	Player* player_ = nullptr;
+	//ビュープロジェクション
 	ViewProjection viewProjection_;
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
 
-	//円周率
-	float PI = 3.1415927;
+	//デバッグカメラ有効
+	bool isDebugCameraActive_ = false;
+
+	Model* model_=nullptr;
+
+	uint32_t textureHandle = 0;
 
 	//カメラ上方向の角度
 	float viewAngle = 0.0f;
