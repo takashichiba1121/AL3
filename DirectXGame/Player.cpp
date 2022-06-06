@@ -62,13 +62,9 @@ void Player::Update() {
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
 	Matrix4  matTrams = MathUtility::Matrix4Identity();
-	matTrams =
-	{
-		1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		worldTransform_.translation_.x,worldTransform_.translation_.y,worldTransform_.translation_.z,1,
-	};
+	matTrams.m[3][0] = worldTransform_.translation_.x;
+	matTrams.m[3][1] = worldTransform_.translation_.y;
+	matTrams.m[3][2] = worldTransform_.translation_.z;
 	worldTransform_.matWorld_ = matTrams;
 	worldTransform_.TransferMatrix();
 
