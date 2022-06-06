@@ -236,7 +236,6 @@ void GameScene::Update() {
 			"親:(%f,%f,%f)", worldTransforms_[PartId::kRoot].translation_.x, worldTransforms_[PartId::kRoot].translation_.y, worldTransforms_[PartId::kRoot].translation_.z);
 		for (int i = 0; i < kNumPartId; i++)
 		{
-			if (i ==0) { continue; }
 			Matrix4  matTrams = MathUtility::Matrix4Identity();
 			matTrams.m[3][0] = worldTransforms_[i].translation_.x;
 			matTrams.m[3][1] = worldTransforms_[i].translation_.y;
@@ -250,7 +249,9 @@ void GameScene::Update() {
 			matrix *= matTrams;
 			matrix *= matrot;
 			worldTransforms_[i].matWorld_ = matrix;
-			worldTransforms_[i].matWorld_ *= worldTransforms_[i].parent_->matWorld_;
+			if (i != 0) {
+				worldTransforms_[i].matWorld_ *= worldTransforms_[i].parent_->matWorld_;
+			}
 			worldTransforms_[i].TransferMatrix();
 		}
 	}
