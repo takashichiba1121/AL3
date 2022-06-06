@@ -43,16 +43,16 @@ class GameScene {
 	void Draw();
 
 	//アフィン変換拡縮
-	Matrix4 matScale(Vector3 Scale);
+	Matrix4 makematScale();
 
 	//アフィン変換回転
-	Matrix4 matRot(Vector3 Rot);
+	Matrix4 makematRot();
 
 	//アフィン変換平行移動
-	Matrix4 matTrams(Vector3 Trams);
+	Matrix4 makematTrams();
 
 	//アフィン変換
-	void mat();
+	void TransformationByaffine();
 
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;

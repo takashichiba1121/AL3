@@ -3,6 +3,7 @@
 #include"AxisIndicator.h"
 #include <cassert>
 #include<cmath>
+#include"MathUtility.h"
 
 GameScene::GameScene() {}
 
@@ -41,7 +42,7 @@ void GameScene::Initialize() {
 	worldTransform_.scale_={ 2,2,2 };
 	worldTransform_.rotation_ = { PI / 4,PI / 4,PI/4 };
 	worldTransform_.translation_ = { 10,10,10 };
-	mat();
+	TransformationByaffine();
 }
 
 void GameScene::Update() {
@@ -96,37 +97,37 @@ void GameScene::Draw() {
 
 #pragma endregion
 }
-Matrix4 GameScene::matScale(Vector3 Scale)
+Matrix4 GameScene::makematScale()
 {
 	Matrix4 matScale =
 	{
-		Scale.x,0,0,0,
-		0,Scale.y,0,0,
-		0,0,Scale.z,0,
+		worldTransform_.scale_.x,0,0,0,
+		0,worldTransform_.scale_.y,0,0,
+		0,0,worldTransform_.scale_.z,0,
 		0,0,0,1,
 	};
 	return matScale;
 }
-Matrix4 GameScene::matRot(Vector3 Rot)
+Matrix4 GameScene::makematRot()
 {
 	Matrix4 matRotZ =
 	{
 		1,0,0,0,
-		0,cos(Rot.z),sin(Rot.z),0,
-		0,-sin(Rot.z),cos(Rot.z),0,
+		0,cos(worldTransform_.rotation_.z),sin(worldTransform_.rotation_.z),0,
+		0,-sin(worldTransform_.rotation_.z),cos(worldTransform_.rotation_.z),0,
 		0,0,0,1,
 	};
 	Matrix4 matRotY =
 	{
-		cos(Rot.y),0,-sin(Rot.y),0,
+		cos(worldTransform_.rotation_.y),0,-sin(worldTransform_.rotation_.y),0,
 		0,1,0,0,
-		sin(Rot.y),0,cos(Rot.y),0,
+		sin(worldTransform_.rotation_.y),0,cos(worldTransform_.rotation_.y),0,
 		0,0,0,1,
 	};
 	Matrix4 matRotX =
 	{
-		cos(Rot.x),sin(Rot.x),0,0,
-		-sin(Rot.x),cos(Rot.x),0,0,
+		cos(worldTransform_.rotation_.x),sin(worldTransform_.rotation_.x),0,0,
+		-sin(worldTransform_.rotation_.x),cos(worldTransform_.rotation_.x),0,0,
 		0,0,1,0,
 		0,0,0,1,
 	};
@@ -142,7 +143,7 @@ Matrix4 GameScene::matRot(Vector3 Rot)
 	matRot *= matRotZ;
 	return matRot;
 }
-Matrix4 GameScene::matTrams(Vector3 Trams)
+Matrix4 GameScene::makematTrams()
 {
 	Matrix4  matTrams;
 	matTrams =
@@ -150,19 +151,19 @@ Matrix4 GameScene::matTrams(Vector3 Trams)
 		1,0,0,0,
 		0,1,0,0,
 		0,0,1,0,
-		Trams.x,Trams.y,Trams.z,1,
+		worldTransform_.translation_.x,worldTransform_.translation_.y,worldTransform_.translation_.z,1,
 	};
 	return matTrams;
 }
-void GameScene::mat()
+void GameScene::TransformationByaffine()
 {
 	worldTransform_.matWorld_.m[0][0] = 1;
 	worldTransform_.matWorld_.m[1][1] = 1;
 	worldTransform_.matWorld_.m[2][2] = 1;
 	worldTransform_.matWorld_.m[3][3] = 1;
-	worldTransform_.matWorld_ *= matScale(worldTransform_.scale_);
-	worldTransform_.matWorld_ *= matRot(worldTransform_.rotation_);
-	worldTransform_.matWorld_ *= matTrams(worldTransform_.translation_);
+	worldTransform_.matWorld_ *= makematScale();
+	worldTransform_.matWorld_ *= makematRot();
+	worldTransform_.matWorld_ *= makematTrams();
 	//行列の転送
 	worldTransform_.TransferMatrix();
 }
