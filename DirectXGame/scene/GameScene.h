@@ -42,6 +42,11 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
+	Matrix4 matScale(Vector3 Scale);
+	Matrix4 matRot(Vector3 Rot);
+	Matrix4 matTrams(Vector3 Trams);
+	void mat(WorldTransform worldTransform);
+
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -62,7 +67,7 @@ class GameScene {
 	DebugCamera* debugCamera_ = nullptr;
 
 	//円周率
-	float PI = 3.1415927;
+	float PI = 3.1415927f;
 
 	//カメラ上方向の角度
 	float viewAngle = 0.0f;
