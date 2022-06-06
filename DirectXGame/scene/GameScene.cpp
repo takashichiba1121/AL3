@@ -144,7 +144,7 @@ Matrix4 GameScene::matRot(Vector3 Rot)
 }
 Matrix4 GameScene::matTrams(Vector3 Trams)
 {
-	Matrix4  matTrams = MathUtility::Matrix4Identity();
+	Matrix4  matTrams;
 	matTrams =
 	{
 		1,0,0,0,
