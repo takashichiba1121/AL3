@@ -42,6 +42,18 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
+	//アフィン変換拡縮
+	Matrix4 matScale(Vector3 Scale);
+
+	//アフィン変換回転
+	Matrix4 matRot(Vector3 Rot);
+
+	//アフィン変換平行移動
+	Matrix4 matTrams(Vector3 Trams);
+
+	//アフィン変換
+	void mat();
+
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -60,7 +72,7 @@ class GameScene {
 	ViewProjection viewProjection_;
 	//デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
-	float PI = 3.1415927;
+	float PI = 3.1415927f;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
