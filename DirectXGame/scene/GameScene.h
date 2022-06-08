@@ -42,17 +42,6 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
-	//アフィン変換拡縮
-	Matrix4 makematScale();
-
-	//アフィン変換回転
-	Matrix4 makematRot();
-
-	//アフィン変換平行移動
-	Matrix4 makematTrams();
-
-	//アフィン変換
-	void TransformationByAffine();
 
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
