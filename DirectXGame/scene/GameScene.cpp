@@ -47,67 +47,6 @@ void GameScene::Initialize() {
 	//軸方向表示が参照するビュープロダクションを指定する（アドレス渡し）
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection_);
 	
-	////X,Y,Z 方向のスケーリングを設定
-	//worldTransform_.scale_={ 2,2,2 };
-	//worldTransform_.rotation_ = { PI / 4,PI / 4,PI/4 };
-	//worldTransform_.translation_ = { 10,10,10 };
-	////スケーリング行列を宣言
-	//Matrix4 matScale=
-	//{
-	//	worldTransform_.scale_.x,0,0,0,
-	//	0,worldTransform_.scale_.y,0,0,
-	//	0,0,worldTransform_.scale_.z,0,
-	//	0,0,0,1,
-	//};
-	//Matrix4 matRotZ =
-	//{
-	//	1,0,0,0,
-	//	0,cos(worldTransform_.rotation_.z),sin(worldTransform_.rotation_.z),0,
-	//	0,-sin(worldTransform_.rotation_.z),cos(worldTransform_.rotation_.z),0,
-	//	0,0,0,1,
-	//};
-	//Matrix4 matRotY =
-	//{
-	//	cos(worldTransform_.rotation_.y),0,-sin(worldTransform_.rotation_.z),0,
-	//	0,1,0,0,
-	//	sin(worldTransform_.rotation_.y),0,cos(worldTransform_.rotation_.z),0,
-	//	0,0,0,1,
-	//};
-	//Matrix4 matRotX =
-	//{
-	//	cos(worldTransform_.rotation_.x),sin(worldTransform_.rotation_.x),0,0,
-	//	-sin(worldTransform_.rotation_.x),cos(worldTransform_.rotation_.x),0,0,
-	//	0,0,1,0,
-	//	0,0,0,1,
-	//};
-	//Matrix4 matRot =
-	//{
-	//	1,0,0,0,
-	//	0,1,0,0,
-	//	0,0,1,0,
-	//	0,0,0,1,
-	//};
-	//Matrix4  matTrams = MathUtility::Matrix4Identity();
-	//matTrams =
-	//{
-	//	1,0,0,0,
-	//	0,1,0,0,
-	//	0,0,1,0,
-	//	worldTransform_.translation_.x,worldTransform_.translation_.y,worldTransform_.translation_.z,1,
-	//};
-
-	//worldTransform_.matWorld_.m[0][0] = 1;
-	//worldTransform_.matWorld_.m[1][1] = 1;
-	//worldTransform_.matWorld_.m[2][2] = 1;
-	//worldTransform_.matWorld_.m[3][3] = 1;
-	//worldTransform_.matWorld_ *= matScale;
-	//matRot*= matRotX;
-	//matRot *= matRotY;
-	//matRot *= matRotZ;
-	//worldTransform_.matWorld_ *= matRot;
-	//worldTransform_.matWorld_ *= matTrams;
-	////行列の転送
-	//worldTransform_.TransferMatrix();
 	//乱数シード生成器
 	std::random_device seed_gen;
 	//メルセンヌ・ツイスターの乱数エンジン
@@ -129,55 +68,7 @@ void GameScene::Initialize() {
 	worldTransform.scale_={ 1,1,1 };
 	worldTransform.rotation_ = { RotX(engine),RotY(engine),RotZ(engine) };
 	worldTransform.translation_ = { TransX(engine),TransY(engine),TransZ(engine) };
-	//スケーリング行列を宣言
-	Matrix4 matRotZ =
-	{
-		1,0,0,0,
-		0,cos(worldTransform.rotation_.z),sin(worldTransform.rotation_.z),0,
-		0,-sin(worldTransform.rotation_.z),cos(worldTransform.rotation_.z),0,
-		0,0,0,1
-	};
-	Matrix4 matRotY =
-	{
-		cos(worldTransform.rotation_.y),0,-sin(worldTransform.rotation_.z),0,
-		0,1,0,0,
-		sin(worldTransform.rotation_.y),0,cos(worldTransform.rotation_.z),0,
-		0,0,0,1,
-	};
-	Matrix4 matRotX =
-	{
-		cos(worldTransform.rotation_.x),sin(worldTransform.rotation_.x),0,0,
-		-sin(worldTransform.rotation_.x),cos(worldTransform.rotation_.x),0,0,
-		0,0,1,0,
-		0,0,0,1,
-	};
-	Matrix4 matRot =
-	{
-		1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		0,0,0,1,
-	};
-	Matrix4  matTrams = MathUtility::Matrix4Identity();
-	matTrams =
-	{
-		1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		worldTransform.translation_.x,worldTransform.translation_.y,worldTransform.translation_.z,1,
-	};
-
-	worldTransform.matWorld_.m[0][0] = 1;
-	worldTransform.matWorld_.m[1][1] = 1;
-	worldTransform.matWorld_.m[2][2] = 1;
-	worldTransform.matWorld_.m[3][3] = 1;
-	matRot*= matRotX;
-	matRot *= matRotY;
-	matRot *= matRotZ;
-	worldTransform.matWorld_ *= matRot;
-	worldTransform.matWorld_ *= matTrams;
-	//行列の転送
-	worldTransform.TransferMatrix();
+	TransformationByAffine(worldTransform);
 	}
 }
 
@@ -342,4 +233,58 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+Matrix4 GameScene::makeScale(Vector3 Scale)
+{
+	Matrix4 matScale = MathUtility::Matrix4Identity();
+	matScale.m[0][0] = Scale.x;
+	matScale.m[1][1] = Scale.y;
+	matScale.m[2][2] = Scale.z;
+	return matScale;
+}
+Matrix4 GameScene::makeRot(Vector3 Rot)
+{
+	Matrix4 matRotZ = MathUtility::Matrix4Identity();
+	matRotZ.m[1][1] = cos(Rot.z);
+	matRotZ.m[1][2] = sin(Rot.z);
+	matRotZ.m[2][1] = -sin(Rot.z);
+	matRotZ.m[2][2] = cos(Rot.z);
+
+	Matrix4 matRotY = MathUtility::Matrix4Identity();
+	matRotY.m[0][0] = cos(Rot.y);
+	matRotY.m[0][2] = -sin(Rot.y);
+	matRotY.m[2][0] = sin(Rot.y);
+	matRotY.m[2][2] = cos(Rot.y);
+
+	Matrix4 matRotX = MathUtility::Matrix4Identity();
+	matRotX.m[0][0] = cos(Rot.x);
+	matRotX.m[0][1] = sin(Rot.x);
+	matRotX.m[1][0] = -sin(Rot.x);
+	matRotX.m[1][1] = cos(Rot.x);
+
+	Matrix4 matRot = MathUtility::Matrix4Identity();
+	matRot *= matRotX;
+	matRot *= matRotY;
+	matRot *= matRotZ;
+	return matRot;
+}
+Matrix4 GameScene::makeTrams(Vector3 Trams)
+{
+	Matrix4  matTrams = MathUtility::Matrix4Identity();
+	matTrams.m[3][0] = Trams.x;
+	matTrams.m[3][1] = Trams.y;
+	matTrams.m[3][2] = Trams.z;
+	return matTrams;
+}
+void GameScene::TransformationByAffine(WorldTransform worldTransform)
+{
+	worldTransform.matWorld_.m[0][0] = 1;
+	worldTransform.matWorld_.m[1][1] = 1;
+	worldTransform.matWorld_.m[2][2] = 1;
+	worldTransform.matWorld_.m[3][3] = 1;
+	worldTransform.matWorld_ *= makeScale(worldTransform.scale_);
+	worldTransform.matWorld_ *= makeRot(worldTransform.rotation_);
+	worldTransform.matWorld_ *= makeTrams(worldTransform.translation_);
+	//行列の転送
+	worldTransform.TransferMatrix();
 }

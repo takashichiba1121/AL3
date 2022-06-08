@@ -42,6 +42,15 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
+	//X,Y,Zの倍率を入れると行列を返す
+	Matrix4 makeScale(Vector3 Scale);
+	//X,Y,Zの回転をを入れると行列を返す（ラジアン）
+	Matrix4 makeRot(Vector3 Rot);
+	//X,Y,Zの平行移動をを入れると行列を返す
+	Matrix4 makeTrams(Vector3 Trams);
+	//ワールドトランスフォームにScale,Rot,Transformをいれて渡すと変換してくれる
+	void TransformationByAffine(WorldTransform worldTransform);
+
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
