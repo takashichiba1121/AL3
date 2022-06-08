@@ -256,45 +256,33 @@ void GameScene::Draw() {
 }
 Matrix4 GameScene::matScale(Vector3 Scale)
 {
-	Matrix4 matScale =
-	{
-		Scale.x,0,0,0,
-		0,Scale.y,0,0,
-		0,0,Scale.z,0,
-		0,0,0,1,
-	};
+	Matrix4 matScale = MathUtility::Matrix4Identity();
+	matScale.m[0][0] = Scale.x;
+	matScale.m[1][1] = Scale.y;
+	matScale.m[2][2] = Scale.z;
 	return matScale;
 }
 Matrix4 GameScene::matRot(Vector3 Rot)
 {
-	Matrix4 matRotZ =
-	{
-		1,0,0,0,
-		0,cos(Rot.z),sin(Rot.z),0,
-		0,-sin(Rot.z),cos(Rot.z),0,
-		0,0,0,1,
-	};
-	Matrix4 matRotY =
-	{
-		cos(Rot.y),0,-sin(Rot.y),0,
-		0,1,0,0,
-		sin(Rot.y),0,cos(Rot.y),0,
-		0,0,0,1,
-	};
-	Matrix4 matRotX =
-	{
-		cos(Rot.x),sin(Rot.x),0,0,
-		-sin(Rot.x),cos(Rot.x),0,0,
-		0,0,1,0,
-		0,0,0,1,
-	};
-	Matrix4 matRot =
-	{
-		1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		0,0,0,1,
-	};
+	Matrix4 matRotZ = MathUtility::Matrix4Identity();
+	matRotZ.m[1][1] = cos(Rot.z);
+	matRotZ.m[1][2] = sin(Rot.z);
+	matRotZ.m[2][1] = -sin(Rot.z);
+	matRotZ.m[2][2] = cos(Rot.z);
+	
+	Matrix4 matRotY = MathUtility::Matrix4Identity();
+	matRotY.m[0][0] = cos(Rot.y);
+	matRotY.m[0][2] = -sin(Rot.y);
+	matRotY.m[2][0] = sin(Rot.y);
+	matRotY.m[2][2] = cos(Rot.y);
+
+	Matrix4 matRotX = MathUtility::Matrix4Identity();
+	matRotX.m[0][0] = cos(Rot.x);
+	matRotX.m[0][1] = sin(Rot.x);
+	matRotX.m[1][0] = -sin(Rot.x);
+	matRotX.m[1][1] = cos(Rot.x);
+
+	Matrix4 matRot = MathUtility::Matrix4Identity();
 	matRot *= matRotX;
 	matRot *= matRotY;
 	matRot *= matRotZ;
@@ -303,13 +291,9 @@ Matrix4 GameScene::matRot(Vector3 Rot)
 Matrix4 GameScene::matTrams(Vector3 Trams)
 {
 	Matrix4  matTrams = MathUtility::Matrix4Identity();
-	matTrams =
-	{
-		1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		Trams.x,Trams.y,Trams.z,1,
-	};
+	matTrams.m[3][0] = Trams.x;
+	matTrams.m[3][1] = Trams.y;
+	matTrams.m[3][2] = Trams.z;
 	return matTrams;
 }
 void GameScene::mat(WorldTransform worldTransform)
