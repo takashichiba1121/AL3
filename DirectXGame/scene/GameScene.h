@@ -52,7 +52,7 @@ class GameScene {
 	Matrix4 makematTrams();
 
 	//アフィン変換
-	void TransformationByaffine();
+	void TransformationByAffine();
 
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;

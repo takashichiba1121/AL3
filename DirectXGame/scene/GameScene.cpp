@@ -42,7 +42,7 @@ void GameScene::Initialize() {
 	worldTransform_.scale_={ 2,2,2 };
 	worldTransform_.rotation_ = { PI / 4,PI / 4,PI/4 };
 	worldTransform_.translation_ = { 10,10,10 };
-	TransformationByaffine();
+	TransformationByAffine();
 }
 
 void GameScene::Update() {
@@ -155,7 +155,7 @@ Matrix4 GameScene::makematTrams()
 	};
 	return matTrams;
 }
-void GameScene::TransformationByaffine()
+void GameScene::TransformationByAffine()
 {
 	worldTransform_.matWorld_.m[0][0] = 1;
 	worldTransform_.matWorld_.m[1][1] = 1;
