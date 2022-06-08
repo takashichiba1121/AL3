@@ -127,7 +127,7 @@ void GameScene::Initialize() {
 		worldTransform.scale_ = { 1,1,1 };
 		worldTransform.rotation_ = { RotX(engine),RotY(engine),RotZ(engine) };
 		worldTransform.translation_ = { TransX(engine),TransY(engine),TransZ(engine) };
-		mat(worldTransform);
+		TransformationByAffine(worldTransform);
 	}
 }
 
@@ -254,7 +254,7 @@ void GameScene::Draw() {
 
 #pragma endregion
 }
-Matrix4 GameScene::matScale(Vector3 Scale)
+Matrix4 GameScene::makeScale(Vector3 Scale)
 {
 	Matrix4 matScale = MathUtility::Matrix4Identity();
 	matScale.m[0][0] = Scale.x;
@@ -262,7 +262,7 @@ Matrix4 GameScene::matScale(Vector3 Scale)
 	matScale.m[2][2] = Scale.z;
 	return matScale;
 }
-Matrix4 GameScene::matRot(Vector3 Rot)
+Matrix4 GameScene::makeRot(Vector3 Rot)
 {
 	Matrix4 matRotZ = MathUtility::Matrix4Identity();
 	matRotZ.m[1][1] = cos(Rot.z);
@@ -288,7 +288,7 @@ Matrix4 GameScene::matRot(Vector3 Rot)
 	matRot *= matRotZ;
 	return matRot;
 }
-Matrix4 GameScene::matTrams(Vector3 Trams)
+Matrix4 GameScene::makeTrams(Vector3 Trams)
 {
 	Matrix4  matTrams = MathUtility::Matrix4Identity();
 	matTrams.m[3][0] = Trams.x;
@@ -296,15 +296,15 @@ Matrix4 GameScene::matTrams(Vector3 Trams)
 	matTrams.m[3][2] = Trams.z;
 	return matTrams;
 }
-void GameScene::mat(WorldTransform worldTransform)
+void GameScene::TransformationByAffine(WorldTransform worldTransform)
 {
 	worldTransform.matWorld_.m[0][0] = 1;
 	worldTransform.matWorld_.m[1][1] = 1;
 	worldTransform.matWorld_.m[2][2] = 1;
 	worldTransform.matWorld_.m[3][3] = 1;
-	worldTransform.matWorld_ *= matScale(worldTransform.scale_);
-	worldTransform.matWorld_ *= matRot(worldTransform.rotation_);
-	worldTransform.matWorld_ *= matTrams(worldTransform.translation_);
+	worldTransform.matWorld_ *= makeScale(worldTransform.scale_);
+	worldTransform.matWorld_ *= makeRot(worldTransform.rotation_);
+	worldTransform.matWorld_ *= makeTrams(worldTransform.translation_);
 	//行列の転送
 	worldTransform.TransferMatrix();
 }

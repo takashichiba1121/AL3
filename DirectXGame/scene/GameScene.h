@@ -42,10 +42,10 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
-	Matrix4 matScale(Vector3 Scale);
-	Matrix4 matRot(Vector3 Rot);
-	Matrix4 matTrams(Vector3 Trams);
-	void mat(WorldTransform worldTransform);
+	Matrix4 makeScale(Vector3 Scale);
+	Matrix4 makeRot(Vector3 Rot);
+	Matrix4 makeTrams(Vector3 Trams);
+	void TransformationByAffine(WorldTransform worldTransform);
 
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
