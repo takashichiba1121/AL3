@@ -48,7 +48,7 @@ class GameScene {
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	DebugText* debugText_ = nullptr;
-
+	//自キャラ
 	Player* player_ = nullptr;
 	//ビュープロジェクション
 	ViewProjection viewProjection_;

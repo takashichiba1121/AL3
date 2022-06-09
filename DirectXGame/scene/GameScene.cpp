@@ -10,6 +10,7 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete debugCamera_;
+	//自キャラの解放
 	delete player_;
 	delete model_;
 }
@@ -21,9 +22,10 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 	debugText_ = DebugText::GetInstance();
-
+	//自キャラの生成
 	player_ = new Player();
 	model_ = Model::Create();
+	//自キャラの初期化
 	player_->Initialize(model_,textureHandle);
 
 	//ビュープロジェクションの初期化
@@ -107,6 +109,7 @@ void GameScene::Update() {
 	}else{
 		viewProjection_.Initialize();
 	}
+	//自キャラの更新
 	player_->Update();
 	debugText_->SetPos(10, 30);
 	debugText_->Printf("%d", isDebugCameraActive_);
@@ -139,6 +142,7 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	//3Dモデル描画
+	//自キャラの描画
 	player_->Draw(viewProjection_);
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();

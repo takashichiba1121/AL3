@@ -32,6 +32,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 
 void Player::Update() {
 	Vector3 move = { 0,0,0 };
+	Vector3 rot = { 0,0,0 };
 
 	if (input_->PushKey(DIK_LEFT))
 	{
@@ -43,14 +44,23 @@ void Player::Update() {
 	}
 	if (input_->PushKey(DIK_UP))
 	{
-		move.y= 1;
+		move.y = 1;
 	}
 	if (input_->PushKey(DIK_DOWN))
 	{
 		move.y = -1;
 	}
+	if (input_->PushKey(DIK_A))
+	{
+		rot.y = 0.001;
+	}
+	if (input_->PushKey(DIK_D))
+	{
+		rot.y = -0.001;
+	}
 
 	worldTransform_.translation_ += move;
+	worldTransform_.rotation_.y += rot.y * (180 / PI);
 
 	//ˆÚ“®ŒÀŠEÀ•W
 	const float kMoveLimitX = 35.0f;
@@ -63,13 +73,16 @@ void Player::Update() {
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
 	affine::makeMatIdentity(worldTransform_.matWorld_);
+	affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
 	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
 	worldTransform_.TransferMatrix();
 
 	debugText_->SetPos(10, 10);
-	debugText_->Printf("À•W:%f,%f,%f", worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z);
+	debugText_->Printf("À•W:%f,%f,%f\n‰ñ“]:%f,%f,%f",
+		worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z,
+		worldTransform_.rotation_.x, worldTransform_.rotation_.y, worldTransform_.rotation_.z);
 }
 
-void Player::Draw(ViewProjection& viewProjection_){
+void Player::Draw(ViewProjection& viewProjection_) {
 	model_->Draw(worldTransform_, viewProjection_, textureHandle_);
 }
