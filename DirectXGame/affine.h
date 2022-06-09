@@ -8,12 +8,12 @@ namespace MyFanc
 	void makeMatIdentity(Matrix4& matrix);
 
 	//アフィン変換拡縮
-	void makematScale(Matrix4& matrix, Vector3 scale);
+	void makeMatScale(Matrix4& matrix, Vector3 scale);
 
 	//アフィン変換回転
-	void makematRot(Matrix4& matrix, Vector3 rot);
+	void makeMatRot(Matrix4& matrix, Vector3 rot);
 
 	//アフィン変換平行移動
-	void makematTrans(Matrix4& matrix, Vector3 Trans);
+	void makeMatTrans(Matrix4& matrix, Vector3 Trans);
 }
 

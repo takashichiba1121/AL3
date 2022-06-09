@@ -129,9 +129,9 @@ void GameScene::Initialize() {
 		worldTransform.rotation_ = { RotX(engine),RotY(engine),RotZ(engine) };
 		worldTransform.translation_ = { TransX(engine),TransY(engine),TransZ(engine) };
 		MyFanc::makeMatIdentity(worldTransform.matWorld_);
-		MyFanc::makematScale(worldTransform.matWorld_, worldTransform.scale_);
-		MyFanc::makematRot(worldTransform.matWorld_, worldTransform.rotation_);
-		MyFanc::makematTrans(worldTransform.matWorld_, worldTransform.translation_);
+		MyFanc::makeMatScale(worldTransform.matWorld_, worldTransform.scale_);
+		MyFanc::makeMatRot(worldTransform.matWorld_, worldTransform.rotation_);
+		MyFanc::makeMatTrans(worldTransform.matWorld_, worldTransform.translation_);
 		worldTransform.TransferMatrix();
 	}
 }

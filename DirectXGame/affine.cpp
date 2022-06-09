@@ -14,7 +14,7 @@ void MyFanc::makeMatIdentity(Matrix4& matrix)
 }
 
 //アフィン変換拡縮
-void MyFanc::makematScale(Matrix4& matrix, Vector3 scale)
+void MyFanc::makeMatScale(Matrix4& matrix, Vector3 scale)
 {
 	Matrix4 matScale;
 	makeMatIdentity(matScale);
@@ -25,7 +25,7 @@ void MyFanc::makematScale(Matrix4& matrix, Vector3 scale)
 }
 
 //アフィン変換回転
-void MyFanc::makematRot(Matrix4& matrix, Vector3 rot)
+void MyFanc::makeMatRot(Matrix4& matrix, Vector3 rot)
 {
 	Matrix4 matrotZ;
 	makeMatIdentity(matrotZ);
@@ -58,7 +58,7 @@ void MyFanc::makematRot(Matrix4& matrix, Vector3 rot)
 }
 
 //アフィン変換平行移動
-void MyFanc::makematTrans(Matrix4& matrix, Vector3 trans)
+void MyFanc::makeMatTrans(Matrix4& matrix, Vector3 trans)
 {
 	Matrix4  matTrams;
 	makeMatIdentity(matTrams);
