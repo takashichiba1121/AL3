@@ -11,6 +11,7 @@
 #include"DebugCamera.h"
 #include<cassert>
 #include "PLayer.h"
+#include"affine.h"
 void Player::Initialize(Model* model, uint32_t textureHandle) {
 	assert(model);
 
@@ -61,11 +62,8 @@ void Player::Update() {
 	worldTransform_.translation_.y = max(worldTransform_.translation_.y, -kMoveLimitY);
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
-	Matrix4  matTrams = MathUtility::Matrix4Identity();
-	matTrams.m[3][0] = worldTransform_.translation_.x;
-	matTrams.m[3][1] = worldTransform_.translation_.y;
-	matTrams.m[3][2] = worldTransform_.translation_.z;
-	worldTransform_.matWorld_ = matTrams;
+	affine::makeMatIdentity(worldTransform_.matWorld_);
+	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
 	worldTransform_.TransferMatrix();
 
 	debugText_->SetPos(10, 10);
