@@ -4,6 +4,7 @@
 #include <cassert>
 #include<cmath>
 #include<random>
+#include"affine.h"
 
 GameScene::GameScene() {}
 
@@ -127,7 +128,11 @@ void GameScene::Initialize() {
 		worldTransform.scale_ = { 1,1,1 };
 		worldTransform.rotation_ = { RotX(engine),RotY(engine),RotZ(engine) };
 		worldTransform.translation_ = { TransX(engine),TransY(engine),TransZ(engine) };
-		TransformationByAffine(worldTransform);
+		MyFanc::makeMatIdentity(worldTransform.matWorld_);
+		MyFanc::makematScale(worldTransform.matWorld_, worldTransform.scale_);
+		MyFanc::makematRot(worldTransform.matWorld_, worldTransform.rotation_);
+		MyFanc::makematTrans(worldTransform.matWorld_, worldTransform.translation_);
+		worldTransform.TransferMatrix();
 	}
 }
 
@@ -253,58 +258,4 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 #pragma endregion
-}
-Matrix4 GameScene::makeScale(Vector3 Scale)
-{
-	Matrix4 matScale = MathUtility::Matrix4Identity();
-	matScale.m[0][0] = Scale.x;
-	matScale.m[1][1] = Scale.y;
-	matScale.m[2][2] = Scale.z;
-	return matScale;
-}
-Matrix4 GameScene::makeRot(Vector3 Rot)
-{
-	Matrix4 matRotZ = MathUtility::Matrix4Identity();
-	matRotZ.m[1][1] = cos(Rot.z);
-	matRotZ.m[1][2] = sin(Rot.z);
-	matRotZ.m[2][1] = -sin(Rot.z);
-	matRotZ.m[2][2] = cos(Rot.z);
-	
-	Matrix4 matRotY = MathUtility::Matrix4Identity();
-	matRotY.m[0][0] = cos(Rot.y);
-	matRotY.m[0][2] = -sin(Rot.y);
-	matRotY.m[2][0] = sin(Rot.y);
-	matRotY.m[2][2] = cos(Rot.y);
-
-	Matrix4 matRotX = MathUtility::Matrix4Identity();
-	matRotX.m[0][0] = cos(Rot.x);
-	matRotX.m[0][1] = sin(Rot.x);
-	matRotX.m[1][0] = -sin(Rot.x);
-	matRotX.m[1][1] = cos(Rot.x);
-
-	Matrix4 matRot = MathUtility::Matrix4Identity();
-	matRot *= matRotX;
-	matRot *= matRotY;
-	matRot *= matRotZ;
-	return matRot;
-}
-Matrix4 GameScene::makeTrams(Vector3 Trams)
-{
-	Matrix4  matTrams = MathUtility::Matrix4Identity();
-	matTrams.m[3][0] = Trams.x;
-	matTrams.m[3][1] = Trams.y;
-	matTrams.m[3][2] = Trams.z;
-	return matTrams;
-}
-void GameScene::TransformationByAffine(WorldTransform worldTransform)
-{
-	worldTransform.matWorld_.m[0][0] = 1;
-	worldTransform.matWorld_.m[1][1] = 1;
-	worldTransform.matWorld_.m[2][2] = 1;
-	worldTransform.matWorld_.m[3][3] = 1;
-	worldTransform.matWorld_ *= makeScale(worldTransform.scale_);
-	worldTransform.matWorld_ *= makeRot(worldTransform.rotation_);
-	worldTransform.matWorld_ *= makeTrams(worldTransform.translation_);
-	//行列の転送
-	worldTransform.TransferMatrix();
 }

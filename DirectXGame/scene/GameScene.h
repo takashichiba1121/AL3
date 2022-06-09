@@ -42,11 +42,6 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
-	Matrix4 makeScale(Vector3 Scale);
-	Matrix4 makeRot(Vector3 Rot);
-	Matrix4 makeTrams(Vector3 Trams);
-	void TransformationByAffine(WorldTransform worldTransform);
-
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
