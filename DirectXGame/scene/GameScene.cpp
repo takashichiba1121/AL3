@@ -4,6 +4,7 @@
 #include <cassert>
 #include<cmath>
 #include<random>
+#include"affine.h"
 
 GameScene::GameScene() {}
 
@@ -236,19 +237,10 @@ void GameScene::Update() {
 			"親:(%f,%f,%f)", worldTransforms_[PartId::kRoot].translation_.x, worldTransforms_[PartId::kRoot].translation_.y, worldTransforms_[PartId::kRoot].translation_.z);
 		for (int i = 0; i < kNumPartId; i++)
 		{
-			Matrix4  matTrams = MathUtility::Matrix4Identity();
-			matTrams.m[3][0] = worldTransforms_[i].translation_.x;
-			matTrams.m[3][1] = worldTransforms_[i].translation_.y;
-			matTrams.m[3][2] = worldTransforms_[i].translation_.z;
-			Matrix4 matrot = MathUtility::Matrix4Identity();
-			matrot.m[0][0] = cos(worldTransforms_[i].rotation_.y);
-			matrot.m[0][2] = -sin(worldTransforms_[i].rotation_.y);
-			matrot.m[2][0] = sin(worldTransforms_[i].rotation_.y);
-			matrot.m[2][2] = cos(worldTransforms_[i].rotation_.y);
-			Matrix4 matrix= MathUtility::Matrix4Identity();
-			matrix *= matTrams;
-			matrix *= matrot;
-			worldTransforms_[i].matWorld_ = matrix;
+			MyFanc::makeMatIdentity(worldTransforms_[i].matWorld_);
+			MyFanc::makeMatScale(worldTransforms_[i].matWorld_, worldTransforms_[i].scale_);
+			MyFanc::makeMatRot(worldTransforms_[i].matWorld_, worldTransforms_[i].rotation_);
+			MyFanc::makeMatTrans(worldTransforms_[i].matWorld_, worldTransforms_[i].translation_);
 			if (i != 0) {
 				worldTransforms_[i].matWorld_ *= worldTransforms_[i].parent_->matWorld_;
 			}
