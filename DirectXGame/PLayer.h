@@ -10,7 +10,7 @@
 #include "WorldTransform.h"
 #include"DebugCamera.h"
 #include<cassert>
-#include "PLayer.h"
+#include"PlayerBullet.h"
 
 /// <summary>
 /// ©ƒLƒƒƒ‰
@@ -26,6 +26,12 @@ public:
 	/// XV
 	/// </summary>
 	void Update();
+
+	///<summary>
+	///UŒ‚
+	///</summary>
+	void Attack();
+
 	/// <summary>
 	/// •`‰æ
 	/// </summary>
@@ -42,6 +48,9 @@ private:
 	Input* input_ = nullptr;
 
 	DebugText* debugText_ = nullptr;
+
+	//’e
+	PlayerBullet* bullet_ = nullptr;
 
 	float PI = 3.1415927f;
 };

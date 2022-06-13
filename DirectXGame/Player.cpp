@@ -10,7 +10,6 @@
 #include "WorldTransform.h"
 #include"DebugCamera.h"
 #include<cassert>
-#include "PLayer.h"
 #include"affine.h"
 void Player::Initialize(Model* model, uint32_t textureHandle) {
 	assert(model);
@@ -33,7 +32,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 void Player::Update() {
 	Vector3 move = { 0,0,0 };
 	Vector3 rot = { 0,0,0 };
-
+	//ƒvƒŒƒCƒ„[ˆÚ“®ˆ—
 	if (input_->PushKey(DIK_LEFT))
 	{
 		move.x = -1;
@@ -50,6 +49,7 @@ void Player::Update() {
 	{
 		move.y = -1;
 	}
+	//ƒvƒŒƒCƒ„[ù‰ñˆ—
 	if (input_->PushKey(DIK_A))
 	{
 		rot.y = 0.001;
@@ -77,12 +77,36 @@ void Player::Update() {
 	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
 	worldTransform_.TransferMatrix();
 
+	//ƒLƒƒƒ‰ƒNƒ^[UŒ‚ˆ—
+	Attack();
+
+	//’eXV
+	if (bullet_) {
+		bullet_->Update();
+	}
+
 	debugText_->SetPos(10, 10);
 	debugText_->Printf("À•W:%f,%f,%f\n‰ñ“]:%f,%f,%f",
 		worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z,
 		worldTransform_.rotation_.x, worldTransform_.rotation_.y, worldTransform_.rotation_.z);
 }
 
+void Player::Attack(){
+	if (input_->PushKey(DIK_SPACE)){
+		//’e‚Ì¶¬‚µA‰Šú‰»
+		PlayerBullet* newBullet = new PlayerBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_);
+
+		//’e‚Ì“o˜^‚·‚é
+		bullet_ = newBullet;
+	}
+}
+
 void Player::Draw(ViewProjection& viewProjection_) {
 	model_->Draw(worldTransform_, viewProjection_, textureHandle_);
+
+	//’e•`‰æ
+	if (bullet_) {
+		bullet_->Draw(viewProjection_);
+	}
 }
