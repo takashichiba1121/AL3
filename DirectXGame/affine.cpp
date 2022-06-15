@@ -3,8 +3,7 @@
 #include"affine.h"
 
 //単位行列
-void affine::makeMatIdentity(Matrix4& matrix)
-{
+void affine::makeMatIdentity(Matrix4& matrix){
 	matrix = {
 	   1.0f,0,0,0,
 	   0,1.0f,0,0,
@@ -14,8 +13,7 @@ void affine::makeMatIdentity(Matrix4& matrix)
 }
 
 //アフィン変換拡縮
-void affine::makeMatScale(Matrix4& matrix, Vector3 scale)
-{
+void affine::makeMatScale(Matrix4& matrix, Vector3 scale){
 	Matrix4 matScale;
 	makeMatIdentity(matScale);
 	matScale.m[0][0] = scale.x;
@@ -25,8 +23,7 @@ void affine::makeMatScale(Matrix4& matrix, Vector3 scale)
 }
 
 //アフィン変換回転
-void affine::makeMatRot(Matrix4& matrix, Vector3 rot)
-{
+void affine::makeMatRot(Matrix4& matrix, Vector3 rot){
 	Matrix4 matrotZ;
 	makeMatIdentity(matrotZ);
 	matrotZ.m[1][1] = cos(rot.z);
@@ -58,8 +55,7 @@ void affine::makeMatRot(Matrix4& matrix, Vector3 rot)
 }
 
 //アフィン変換平行移動
-void affine::makeMatTrans(Matrix4& matrix, Vector3 trans)
-{
+void affine::makeMatTrans(Matrix4& matrix, Vector3 trans){
 	Matrix4  matTrams;
 	makeMatIdentity(matTrams);
 	matTrams.m[3][0] = trans.x;
