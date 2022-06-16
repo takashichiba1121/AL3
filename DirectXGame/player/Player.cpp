@@ -31,11 +31,6 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 
 void Player::Update() {
 
-	//デスフラグの立った弾を削除
-	bullets_.remove_if([](std::unique_ptr<PlayerBullet>& bullet) {
-		return bullet->IsDead();
-		});
-
 	Vector3 move = { 0,0,0 };
 	Vector3 rot = { 0,0,0 };
 	//プレイヤー移動処理
@@ -55,18 +50,8 @@ void Player::Update() {
 	{
 		move.y = -1;
 	}
-	//プレイヤー旋回処理
-	if (input_->PushKey(DIK_A))
-	{
-		rot.y = 0.001;
-	}
-	if (input_->PushKey(DIK_D))
-	{
-		rot.y = -0.001;
-	}
 
 	worldTransform_.translation_ += move;
-	worldTransform_.rotation_.y += rot.y * (180 / PI);
 
 	//移動限界座標
 	const float kMoveLimitX = 35.0f;
@@ -83,43 +68,12 @@ void Player::Update() {
 	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
 	worldTransform_.TransferMatrix();
 
-	//キャラクター攻撃処理
-	Attack();
-
-	//弾更新
-	for (std::unique_ptr<PlayerBullet>& bullet : bullets_) {
-		bullet->Update();
-	}
-
 	debugText_->SetPos(10, 10);
 	debugText_->Printf("座標:%f,%f,%f\n回転:%f,%f,%f",
 		worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z,
 		worldTransform_.rotation_.x, worldTransform_.rotation_.y, worldTransform_.rotation_.z);
 }
-
-void Player::Attack(){
-	if (input_->TriggerKey(DIK_SPACE)){
-		
-		//弾の速度
-		const float kBulletSpeed = 1.0f;
-		Vector3 velocity(0, 0, kBulletSpeed);
-
-		velocity = affine::MatVector(worldTransform_.matWorld_, velocity);
-
-		//弾の生成し、初期化
-		std::unique_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
-		newBullet->Initialize(model_, worldTransform_.translation_,velocity);
-
-		//弾の登録する
-		bullets_.push_back(std::move(newBullet));
-	}
-}
-
 void Player::Draw(ViewProjection& viewProjection_) {
 	model_->Draw(worldTransform_, viewProjection_, textureHandle_);
 
-	//弾描画
-	for (std::unique_ptr<PlayerBullet>& bullet : bullets_) {
-		bullet->Draw(viewProjection_);
-	}
 }

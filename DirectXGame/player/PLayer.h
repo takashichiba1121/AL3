@@ -10,9 +10,6 @@
 #include "WorldTransform.h"
 #include"DebugCamera.h"
 #include<cassert>
-#include"PlayerBullet.h"
-#include<memory>
-#include<list>
 
 /// <summary>
 /// ©ƒLƒƒƒ‰
@@ -28,11 +25,6 @@ public:
 	/// XV
 	/// </summary>
 	void Update();
-
-	///<summary>
-	///UŒ‚
-	///</summary>
-	void Attack();
 
 	/// <summary>
 	/// •`‰æ
@@ -50,9 +42,4 @@ private:
 	Input* input_ = nullptr;
 
 	DebugText* debugText_ = nullptr;
-
-	//’e
-	std::list<std::unique_ptr<PlayerBullet>>bullets_;
-
-	float PI = 3.1415927f;
 };
