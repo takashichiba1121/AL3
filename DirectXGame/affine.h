@@ -15,4 +15,7 @@ namespace affine
 
 	//アフィン変換平行移動
 	void makeMatTrans(Matrix4& matrix, Vector3 Trans);
+
+	//ベクトルと行列の掛け算
+	Vector3 MatVector(Matrix4 matrix,Vector3 vector);
 }

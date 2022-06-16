@@ -64,3 +64,11 @@ void affine::makeMatTrans(Matrix4& matrix, Vector3 trans){
 
 	matrix *= matTrams;
 }
+
+Vector3 affine::MatVector(Matrix4 matrix, Vector3 vector) {
+	Vector3 matVector = { 0,0,0};
+	matVector.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0] + vector.z * matrix.m[2][0];
+	matVector.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1] + vector.z * matrix.m[2][1];
+	matVector.z = vector.x * matrix.m[0][2] + vector.y * matrix.m[1][2] + vector.z * matrix.m[2][2];
+	return matVector;
+}
