@@ -11,6 +11,7 @@
 #include "WorldTransform.h"
 #include"DebugCamera.h"
 #include "PLayer.h"
+#include"Enemy.h"
 
 /// <summary>
 /// ゲームシーン
@@ -50,6 +51,8 @@ class GameScene {
 	DebugText* debugText_ = nullptr;
 	//自キャラ
 	Player* player_ = nullptr;
+	//敵キャラ
+	Enemy* enemy_ = nullptr;
 	//ビュープロジェクション
 	ViewProjection viewProjection_;
 	//デバッグカメラ
