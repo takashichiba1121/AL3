@@ -15,12 +15,30 @@ void Enemy::Initialize(Model* model)
 
 void Enemy::Update()
 {
-	worldTransform_.translation_ += {0.0f,0.0f,-1.0f};
+	switch (phase_)
+	{
+	case Phase::Approach:
+		worldTransform_.translation_ += {0.0f, 0.0f, -1.0f};
 
-	affine::makeMatIdentity(worldTransform_.matWorld_);
-	affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
-	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
-	worldTransform_.TransferMatrix();
+		affine::makeMatIdentity(worldTransform_.matWorld_);
+		affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
+		affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
+		worldTransform_.TransferMatrix();
+		//‹K’è‚ÌˆÊ’u‚É“ž’B‚µ‚½‚ç—£’E
+		if (worldTransform_.translation_.z < 0.0f)
+		{
+			phase_ = Phase::Leave;
+		}
+		break;
+	case Phase::Leave:
+		worldTransform_.translation_ += {-1.0f, -1.0f, -1.0f};
+
+		affine::makeMatIdentity(worldTransform_.matWorld_);
+		affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
+		affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
+		worldTransform_.TransferMatrix();
+		break;
+	}
 }
 void Enemy::Draw(const ViewProjection& viewProjection)
 {
