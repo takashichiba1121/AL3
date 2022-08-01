@@ -18,7 +18,7 @@ void Enemy::Update()
 	switch (phase_)
 	{
 	case Phase::Approach:
-		worldTransform_.translation_ += {0.0f, 0.0f, -1.0f};
+		worldTransform_.translation_ += {0.0f, 0.0f, -0.1f};
 
 		affine::makeMatIdentity(worldTransform_.matWorld_);
 		affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
@@ -31,7 +31,7 @@ void Enemy::Update()
 		}
 		break;
 	case Phase::Leave:
-		worldTransform_.translation_ += {-1.0f, -1.0f, -1.0f};
+		worldTransform_.translation_ += {-0.1f, -0.1f, -0.1f};
 
 		affine::makeMatIdentity(worldTransform_.matWorld_);
 		affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
