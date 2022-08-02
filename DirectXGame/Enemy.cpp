@@ -1,12 +1,14 @@
 #include"Enemy.h"
+#include"PLayer.h"
 #include<assert.h>
 #include"affine.h"
+#include<cmath>
 void Enemy::Initialize(Model* model)
 {
 	assert(model);
 
 	this->model_ = model;
-	textureHandle_= TextureManager::Load("black.png");
+	textureHandle_ = TextureManager::Load("black.png");
 
 	worldTransform_.Initialize();
 
@@ -20,9 +22,18 @@ void Enemy::Initialize(Model* model)
 
 void Enemy::Fire()
 {
+	assert(player_);
 	//弾の速度
 	const float kBulletSpeed = -1.0f;
-	Vector3 velocity(0, 0, kBulletSpeed);
+	Vector3 playerPos = player_->GetworldPosition();
+	Vector3 enemyPos=worldTransform_.translation_;
+	Vector3 vector = { playerPos.x - enemyPos.x,playerPos.y - enemyPos.y,playerPos.z - enemyPos.z };
+	float len = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+	if (len != 0)
+	{
+		vector /= len;
+	}
+	Vector3 velocity=vector;
 
 	velocity = affine::MatVector(worldTransform_.matWorld_, velocity);
 
@@ -53,7 +64,7 @@ void Enemy::Update()
 		//発射タイマーカウントダウン
 		fireTimer--;
 		//指定時間にr達した
-		if (fireTimer<=0){
+		if (fireTimer <= 0) {
 			//弾を発射
 			Fire();
 			//発射タイマーを初期化

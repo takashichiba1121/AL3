@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "WorldTransform.h"
 #include"EnemyBullet.h"
-
+class Player;
 ///<summary>
 ///敵
 ///</summary>
@@ -22,6 +22,9 @@ public:
 	///</summary>
 	void Fire();
 	void ApproachInutialize();
+
+	void SetPlayer(Player* player) { player_ = player; }
+
 	//発射間隔
 	static const int kFireInterval = 60;
 private:
@@ -44,4 +47,6 @@ private:
 	Phase phase_ = Phase::Approach;
 	//発射タイマー
 	int32_t fireTimer = 0;
+	//自キャラ
+	Player* player_ = nullptr;
 };
