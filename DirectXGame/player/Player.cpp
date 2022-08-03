@@ -41,19 +41,19 @@ void Player::Update() {
 	//プレイヤー移動処理
 	if (input_->PushKey(DIK_LEFT))
 	{
-		move.x = -1;
+		move.x = -0.1;
 	}
 	if (input_->PushKey(DIK_RIGHT))
 	{
-		move.x = 1;
+		move.x = 0.1;
 	}
 	if (input_->PushKey(DIK_UP))
 	{
-		move.y = 1;
+		move.y = 0.1;
 	}
 	if (input_->PushKey(DIK_DOWN))
 	{
-		move.y = -1;
+		move.y = -0.1;
 	}
 	//プレイヤー旋回処理
 	if (input_->PushKey(DIK_A))
@@ -133,4 +133,8 @@ Vector3 Player::GetworldPosition()
 	worldpos.z = worldTransform_.translation_.z;
 
 	return worldpos;
+}
+void Player::OnCollision()
+{
+
 }

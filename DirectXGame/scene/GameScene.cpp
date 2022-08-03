@@ -57,6 +57,10 @@ void GameScene::Update() {
 	player_->Update();
 	//敵キャラの更新
 	enemy_->Update();
+
+	//衝突判定
+	CheckAllCollisions();
+
 	debugText_->SetPos(10, 30);
 	debugText_->Printf("%d", isDebugCameraActive_);
 }
@@ -110,4 +114,93 @@ void GameScene::Draw() {
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+void GameScene::CheckAllCollisions()
+{
+	//判定対象AとBの座標
+	Vector3 posA, posB;
+
+	//自弾リストの取得
+	const std::list<std::unique_ptr<PlayerBullet>>& playerBullets = player_->GetBullets();
+	//敵弾リストの取得
+	const std::list<std::unique_ptr<EnemyBullet>>& enemyBullets = enemy_->GetBullets();
+
+#pragma region 自キャラと敵弾の当たり判定
+	//自キャラの座標
+	posA = player_->GetworldPosition();
+
+	//自キャラと敵弾全ての当たり判定
+	for (const std::unique_ptr<EnemyBullet>& bullet : enemyBullets) {
+		//敵弾の座標
+		posB = bullet->GetworldPosition();
+
+		const float AR = 1;
+		const float BR = 1;
+
+		float A = pow((posB.x-posA.x),2) + pow((posB.y-posA.y),2) + pow((posB.z-posA.z),2);
+		float B = pow((AR + BR),2);
+
+		if (A <= B)
+		{
+			//自キャラの衝突時コールバックを呼び出す
+			player_->OnCollision();
+			//敵弾の衝突時コールバックを呼び出す
+			bullet->OnCollision();
+		}
+	}
+#pragma endregion
+
+#pragma region 自弾と敵キャラの当たり判定
+	//敵キャラの座標
+	posA = enemy_->GetworldPosition();
+
+	//自弾と敵キャラ全ての当たり判定
+	for (const std::unique_ptr<PlayerBullet>& bullet : playerBullets) {
+		//自弾の座標
+		posB = bullet->GetworldPosition();
+
+		const float AR = 1;
+		const float BR = 1;
+
+		float A = pow((posB.x - posA.x), 2) + pow((posB.y - posA.y), 2) + pow((posB.z - posA.z), 2);
+		float B = pow((AR + BR), 2);
+
+		if (A <= B)
+		{
+			//自キャラの衝突時コールバックを呼び出す
+			enemy_->OnCollision();
+			//敵弾の衝突時コールバックを呼び出す
+			bullet->OnCollision();
+		}
+	}
+#pragma endregion
+
+#pragma region 自弾と敵弾の当たり判定
+	//自キャラと敵弾全ての当たり判定
+	for (const std::unique_ptr<EnemyBullet>& enemybullet : enemyBullets) {
+		//自弾と敵キャラ全ての当たり判定
+		for (const std::unique_ptr<PlayerBullet>& playerbullet : playerBullets) {
+			//自弾の座標
+			posA = playerbullet->GetworldPosition();
+			//自弾の座標
+			posB = enemybullet->GetworldPosition();
+
+			const float AR = 1;
+			const float BR = 1;
+
+			float A = pow((posB.x - posA.x), 2) + pow((posB.y - posA.y), 2) + pow((posB.z - posA.z), 2);
+			float B = pow((AR + BR), 2);
+
+			if (A <= B)
+			{
+				//自キャラの衝突時コールバックを呼び出す
+				enemybullet->OnCollision();
+				//敵弾の衝突時コールバックを呼び出す
+				playerbullet->OnCollision();
+			}
+		}
+	}
+#pragma endregion
+
+
 }
