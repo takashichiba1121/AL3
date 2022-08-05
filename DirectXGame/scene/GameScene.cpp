@@ -15,6 +15,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete model_;
 	delete enemy_;
+	delete skydomeModel_;
 }
 
 void GameScene::Initialize() {
@@ -25,6 +26,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	debugText_ = DebugText::GetInstance();
 	//自キャラの生成
+	skydome = std::make_unique<Skydome>();
 	player_ = new Player();
 	enemy_ = new Enemy();
 	model_ = Model::Create();
@@ -37,6 +39,10 @@ void GameScene::Initialize() {
 	
 	//敵キャラに自キャラのアドレスを渡す
 	enemy_->SetPlayer(player_);
+
+	skydomeModel_ = Model::CreateFromOBJ("test", true);
+
+	skydome->Initialize(skydomeModel_);
 }
 
 void GameScene::Update() {
@@ -92,6 +98,7 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	//3Dモデル描画
+	skydome->Draw(viewProjection_);
 	//自キャラの描画
 	player_->Draw(viewProjection_);
 	enemy_->Draw(viewProjection_);

@@ -12,6 +12,7 @@
 #include"DebugCamera.h"
 #include "PLayer.h"
 #include"Enemy.h"
+#include"Skydome.h"
 
 /// <summary>
 /// ゲームシーン
@@ -72,6 +73,10 @@ class GameScene {
 
 	//カメラ上方向の角度
 	float viewAngle = 0.0f;
+
+	Model* skydomeModel_ = nullptr;
+
+	std::unique_ptr<Skydome> skydome = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用
