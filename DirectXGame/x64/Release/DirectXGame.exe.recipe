@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\DirectXGame.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\ObjPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\ObjVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\PrimitivePS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\PrimitiveVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\ShapePS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\ShapeVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\SpritePS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Release\SpriteVS.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
