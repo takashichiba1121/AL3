@@ -46,6 +46,8 @@ public:
 	void OnCollision();
 
 	const std::list<std::unique_ptr<PlayerBullet>>& GetBullets() { return bullets_; }
+
+	void SetParent(WorldTransform *worldTransform) { worldTransform_.parent_ = worldTransform; };
 private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;

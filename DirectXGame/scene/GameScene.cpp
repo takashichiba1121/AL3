@@ -27,6 +27,7 @@ void GameScene::Initialize() {
 	debugText_ = DebugText::GetInstance();
 	//自キャラの生成
 	skydome = std::make_unique<Skydome>();
+	railCamera_ = std::make_unique <RailCamera>();
 	player_ = new Player();
 	enemy_ = new Enemy();
 	model_ = Model::Create();
@@ -37,6 +38,10 @@ void GameScene::Initialize() {
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 	
+	railCamera_->Initialize( Vector3{0.0f,0.0f,-50.0f}, Vector3{0.0f,0.0f,0.0f});
+
+	player_->SetParent(railCamera_->GetWorldTransform());
+
 	//敵キャラに自キャラのアドレスを渡す
 	enemy_->SetPlayer(player_);
 
@@ -66,6 +71,8 @@ void GameScene::Update() {
 
 	//衝突判定
 	CheckAllCollisions();
+
+	railCamera_->Update();
 
 	debugText_->SetPos(10, 30);
 	debugText_->Printf("%d", isDebugCameraActive_);
@@ -98,10 +105,10 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 	//3Dモデル描画
-	skydome->Draw(viewProjection_);
+	skydome->Draw(railCamera_->GetViewProjection());
 	//自キャラの描画
-	player_->Draw(viewProjection_);
-	enemy_->Draw(viewProjection_);
+	player_->Draw(railCamera_->GetViewProjection());
+	enemy_->Draw(railCamera_->GetViewProjection());
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
 #pragma endregion

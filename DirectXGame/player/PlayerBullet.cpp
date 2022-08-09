@@ -14,7 +14,7 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position,const Vector
 	worldTransform_.Initialize();
 
 	worldTransform_.translation_ = position;
-	
+
 	velocity_ = velocity;
 }
 void PlayerBullet::Update()

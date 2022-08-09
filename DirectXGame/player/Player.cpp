@@ -22,10 +22,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle) {
 	debugText_ = DebugText::GetInstance();
 
 	worldTransform_.Initialize();
-	worldTransform_.matWorld_.m[0][0] = 1;
-	worldTransform_.matWorld_.m[1][1] = 1;
-	worldTransform_.matWorld_.m[2][2] = 1;
-	worldTransform_.matWorld_.m[3][3] = 1;
+	worldTransform_.translation_=Vector3(0.0f,0.0f,50.0f);
 	textureHandle_ = TextureManager::Load("mario.jpg");
 }
 
@@ -55,15 +52,6 @@ void Player::Update() {
 	{
 		move.y = -0.1;
 	}
-	//プレイヤー旋回処理
-	if (input_->PushKey(DIK_A))
-	{
-		rot.y = 0.001;
-	}
-	if (input_->PushKey(DIK_D))
-	{
-		rot.y = -0.001;
-	}
 
 	worldTransform_.translation_ += move;
 	worldTransform_.rotation_.y += rot.y * (180 / PI);
@@ -78,9 +66,13 @@ void Player::Update() {
 	worldTransform_.translation_.y = max(worldTransform_.translation_.y, -kMoveLimitY);
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
+
+
+
 	affine::makeMatIdentity(worldTransform_.matWorld_);
 	affine::makeMatRot(worldTransform_.matWorld_, worldTransform_.rotation_);
 	affine::makeMatTrans(worldTransform_.matWorld_, worldTransform_.translation_);
+	worldTransform_.matWorld_ *= worldTransform_.parent_->matWorld_;
 	worldTransform_.TransferMatrix();
 
 	//キャラクター攻撃処理
@@ -103,12 +95,16 @@ void Player::Attack(){
 		//弾の速度
 		const float kBulletSpeed = 1.0f;
 		Vector3 velocity(0, 0, kBulletSpeed);
-
+		velocity = affine::MatVector(worldTransform_.parent_->matWorld_, velocity);
 		velocity = affine::MatVector(worldTransform_.matWorld_, velocity);
 
 		//弾の生成し、初期化
 		std::unique_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
-		newBullet->Initialize(model_, worldTransform_.translation_,velocity);
+		Vector3 playerWolrdPos = worldTransform_.parent_->translation_;
+		playerWolrdPos += worldTransform_.translation_;
+		Vector3 playerWolrdRot = worldTransform_.parent_->rotation_;
+		playerWolrdRot += worldTransform_.rotation_;
+		newBullet->Initialize(model_, GetworldPosition(), velocity);
 
 		//弾の登録する
 		bullets_.push_back(std::move(newBullet));
@@ -128,10 +124,9 @@ Vector3 Player::GetworldPosition()
 	//ワールド座標を入れる変数
 	Vector3 worldpos;
 	//ワールド行列の平行移動成分を取得（ワールド座標）
-	worldpos.x = worldTransform_.translation_.x;
-	worldpos.y = worldTransform_.translation_.y;
-	worldpos.z = worldTransform_.translation_.z;
-
+	worldpos.x = worldTransform_.matWorld_.m[3][0];
+	worldpos.y = worldTransform_.matWorld_.m[3][1];
+	worldpos.z = worldTransform_.matWorld_.m[3][2];
 	return worldpos;
 }
 void Player::OnCollision()
