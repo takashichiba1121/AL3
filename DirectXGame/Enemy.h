@@ -3,12 +3,13 @@
 #include "WorldTransform.h"
 #include"EnemyBullet.h"
 class Player;
+class GameScene;
 ///<summary>
 ///敵
 ///</summary>
 class Enemy {
 public:
-	void Initialize(Model* model);
+	void Initialize(Model* model,Vector3 translation);
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -31,7 +32,11 @@ public:
 	//ワールド座標を取得
 	Vector3 GetworldPosition();
 
+	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
+
 	const std::list<std::unique_ptr<EnemyBullet>>& GetBullets() { return bullets_; }
+
+	bool IsDead()const { return isDead_; }
 
 	//発射間隔
 	static const int kFireInterval = 60;
@@ -57,4 +62,9 @@ private:
 	int32_t fireTimer = 0;
 	//自キャラ
 	Player* player_ = nullptr;
+
+	//ゲームシーン
+	GameScene* gameScene_ = nullptr;
+	//デスフラグ
+	bool isDead_ = false;
 };

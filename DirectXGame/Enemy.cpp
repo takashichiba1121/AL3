@@ -2,8 +2,9 @@
 #include"PLayer.h"
 #include<assert.h>
 #include"affine.h"
+#include"GameScene.h"
 #include<cmath>
-void Enemy::Initialize(Model* model)
+void Enemy::Initialize(Model* model, Vector3 translation)
 {
 	assert(model);
 
@@ -12,7 +13,7 @@ void Enemy::Initialize(Model* model)
 
 	worldTransform_.Initialize();
 
-	worldTransform_.translation_ = { 10.0f,10.0f,50.0f };
+	worldTransform_.translation_ = translation;
 
 	//Fire();
 
@@ -23,6 +24,7 @@ void Enemy::Initialize(Model* model)
 void Enemy::Fire()
 {
 	assert(player_);
+	assert(gameScene_);
 	//’e‚Ì‘¬“x
 	const float kBulletSpeed = 0.5f;
 	Vector3 playerPos = player_->GetworldPosition();
@@ -43,16 +45,11 @@ void Enemy::Fire()
 	newBullet->Initialize(model_, worldTransform_.translation_, velocity);
 
 	//’e‚Ì“o˜^‚·‚é
-	bullets_.push_back(std::move(newBullet));
+	gameScene_->AddEnemyBullet(std::move(newBullet));
 }
 
 void Enemy::Update()
 {
-
-	//ƒfƒXƒtƒ‰ƒO‚Ì—§‚Á‚½’e‚ğíœ
-	bullets_.remove_if([](std::unique_ptr<EnemyBullet>& bullet) {
-		return bullet->IsDead();
-		});
 	switch (phase_)
 	{
 	case Phase::Approach:
@@ -86,19 +83,10 @@ void Enemy::Update()
 		worldTransform_.TransferMatrix();
 		break;
 	}
-	//’eXV
-	for (std::unique_ptr<EnemyBullet>& bullet : bullets_) {
-		bullet->Update();
-	}
 }
 void Enemy::Draw(const ViewProjection& viewProjection)
 {
 	model_->Draw(worldTransform_, viewProjection, textureHandle_);
-
-	//’e•`‰æ
-	for (std::unique_ptr<EnemyBullet>& bullet : bullets_) {
-		bullet->Draw(viewProjection);
-	}
 }
 void Enemy::ApproachInutialize()
 {
@@ -107,7 +95,7 @@ void Enemy::ApproachInutialize()
 }
 void Enemy::OnCollision()
 {
-
+	isDead_ = true;
 }
 Vector3 Enemy::GetworldPosition()
 {

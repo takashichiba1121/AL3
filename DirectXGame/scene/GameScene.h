@@ -14,16 +14,18 @@
 #include"Enemy.h"
 #include"Skydome.h"
 #include"RailCamera.h"
+#include<sstream>
+
 
 /// <summary>
 /// ゲームシーン
 /// </summary>
 class GameScene {
 
-  public: // メンバ関数
-	/// <summary>
-	/// コンストクラタ
-	/// </summary>
+public: // メンバ関数
+  /// <summary>
+  /// コンストクラタ
+  /// </summary>
 	GameScene();
 
 	/// <summary>
@@ -34,7 +36,7 @@ class GameScene {
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize(GameScene* gameScene);
 
 	/// <summary>
 	/// 毎フレーム処理
@@ -46,12 +48,26 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
+	void Fire(Vector3 trans);
+
 	///<summary>
 	///衝突判定と応答
 	///</summary>
 	void CheckAllCollisions();
 
-  private: // メンバ変数
+	void AddEnemyBullet(std::unique_ptr<EnemyBullet> enemyBullet);
+
+	/// <summary>
+	/// 敵発生データの読み込み
+	/// </summary>
+	void LoadEnemyPopData();
+
+	/// <summary>
+	/// 敵発生コマンドの更新
+	/// </summary>
+	void UpdateEnemyPopCommands();
+
+private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
@@ -59,7 +75,7 @@ class GameScene {
 	//自キャラ
 	Player* player_ = nullptr;
 	//敵キャラ
-	Enemy* enemy_ = nullptr;
+	std::list<std::unique_ptr<Enemy>> enemy_;
 	//ビュープロジェクション
 	ViewProjection viewProjection_;
 	//デバッグカメラ
@@ -68,7 +84,7 @@ class GameScene {
 	//デバッグカメラ有効
 	bool isDebugCameraActive_ = false;
 
-	Model* model_=nullptr;
+	Model* model_ = nullptr;
 
 	uint32_t textureHandle = 0;
 
@@ -79,7 +95,18 @@ class GameScene {
 
 	std::unique_ptr<Skydome> skydome = nullptr;
 
-	std::unique_ptr <RailCamera> railCamera_=nullptr;
+	std::unique_ptr <RailCamera> railCamera_ = nullptr;
+
+	//弾
+	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
+
+	GameScene* gameScene_=nullptr;
+
+	std::stringstream enemyPopCommands;
+
+	bool enemyPop = true;
+
+	float enemyPopTime = true;
 
 	/// <summary>
 	/// ゲームシーン用

@@ -1,6 +1,9 @@
-﻿  Player.cpp
-C:\K021G1120\二年次\AL3\3D\DirectXGame\player\Player.cpp(41,16): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\K021G1120\二年次\AL3\3D\DirectXGame\player\Player.cpp(45,15): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\K021G1120\二年次\AL3\3D\DirectXGame\player\Player.cpp(49,15): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\K021G1120\二年次\AL3\3D\DirectXGame\player\Player.cpp(53,16): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+﻿  GameScene.cpp
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(175,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(176,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(200,12): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(201,12): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(227,12): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(228,12): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\K021G1120\二年次\AL3\3D\DirectXGame\scene\GameScene.cpp(323,19): warning C4244: '=': 'int32_t' から 'float' への変換です。データが失われる可能性があります。
   DirectXGame.vcxproj -> C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Debug\DirectXGame.exe
