@@ -27,7 +27,7 @@ public:
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update(ViewProjection viewProjection);
 
 	///<summary>
 	///攻撃
@@ -47,7 +47,12 @@ public:
 
 	const std::list<std::unique_ptr<PlayerBullet>>& GetBullets() { return bullets_; }
 
-	void SetParent(WorldTransform *worldTransform) { worldTransform_.parent_ = worldTransform; };
+	void SetParent(WorldTransform* worldTransform) { worldTransform_.parent_ = worldTransform; };
+
+	/// <summary>
+	/// UI描画
+	/// </summary>
+	void DrawUI();
 private:
 	//ワールド変換データ
 	WorldTransform worldTransform_;
@@ -64,4 +69,10 @@ private:
 	std::list<std::unique_ptr<PlayerBullet>>bullets_;
 
 	float PI = 3.1415927f;
+
+	//3Dレティクル用ワールドトランスフォーム
+	WorldTransform worldTransform3DReticle_;
+
+	//2Dレティクル用スプライト
+	std::unique_ptr<Sprite> sprite2DReticle_;
 };
