@@ -26,14 +26,6 @@ void RailCamera::Update() {
 	{
 		move.z = -0.1;
 	}
-	if (input_->PushKey(DIK_A))
-	{
-		rot.y = 0.001;
-	}
-	if (input_->PushKey(DIK_D))
-	{
-		rot.y = -0.001;
-	}
 
 	worldTransform_.translation_ += move;
 	worldTransform_.rotation_.y += rot.y * (180 / PI);

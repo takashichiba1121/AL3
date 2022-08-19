@@ -18,4 +18,10 @@ namespace affine
 
 	//ベクトルと行列の掛け算
 	Vector3 MatVector(Matrix4 matrix,Vector3 vector);
+
+	Vector3 Mat3D(Matrix4 matrix, Vector3 vector);
+	//ワールド座標を返す
+	Vector3 GetWorldTrans(Matrix4 matrix);
+
+	Vector3 wdivision(Matrix4 matrix, Vector3 vector);
 }
