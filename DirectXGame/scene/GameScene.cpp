@@ -30,6 +30,7 @@ void GameScene::Initialize(GameScene* gameScene) {
 	railCamera_ = std::make_unique <RailCamera>();
 	player_ = new Player();
 	model_ = Model::Create();
+	TextureManager::Load("2D.png");
 	//自キャラの初期化
 	player_->Initialize(model_,textureHandle);
 
@@ -70,8 +71,6 @@ void GameScene::Update() {
 	enemy_.remove_if([](std::unique_ptr<Enemy>& enemy) {
 		return enemy->IsDead();
 		});
-	//自キャラの更新
-	player_->Update();
 
 	UpdateEnemyPopCommands();
 
@@ -89,6 +88,9 @@ void GameScene::Update() {
 	CheckAllCollisions();
 
 	railCamera_->Update();
+
+	//自キャラの更新
+	player_->Update(railCamera_->GetViewProjection());
 
 	debugText_->SetPos(10, 30);
 	debugText_->Printf("%d", isDebugCameraActive_);
@@ -142,6 +144,7 @@ void GameScene::Draw() {
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
+	player_->DrawUI();
 	/// </summary>
 
 	// デバッグテキストの描画

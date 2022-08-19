@@ -36,13 +36,12 @@ void Enemy::Fire()
 		vector /= len;
 	}
 	vector*= kBulletSpeed;
-	Vector3 velocity=vector;
 
-	velocity = affine::MatVector(worldTransform_.matWorld_, velocity);
+	vector = affine::MatVector(worldTransform_.matWorld_, vector);
 
 	//íeÇÃê∂ê¨ÇµÅAèâä˙âª
 	std::unique_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
-	newBullet->Initialize(model_, worldTransform_.translation_, velocity);
+	newBullet->Initialize(model_, worldTransform_.translation_, vector);
 
 	//íeÇÃìoò^Ç∑ÇÈ
 	gameScene_->AddEnemyBullet(std::move(newBullet));
