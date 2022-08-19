@@ -17,7 +17,7 @@ namespace affine
 	void makeMatTrans(Matrix4& matrix, Vector3 Trans);
 
 	//ベクトルと行列の掛け算
-	Vector3 MatVector(Matrix4 matrix,Vector3 vector);
+	Vector3 MatVector(Matrix4 matrix, Vector3 vector);
 
 	Vector3 Mat3D(Matrix4 matrix, Vector3 vector);
 	//ワールド座標を返す

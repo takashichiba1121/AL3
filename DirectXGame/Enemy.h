@@ -9,7 +9,7 @@ class GameScene;
 ///</summary>
 class Enemy {
 public:
-	void Initialize(Model* model,Vector3 translation);
+	void Initialize(Model* model, Vector3 translation);
 	/// <summary>
 	/// çXêV
 	/// </summary>

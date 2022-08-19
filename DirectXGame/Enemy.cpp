@@ -28,14 +28,14 @@ void Enemy::Fire()
 	//’e‚Ì‘¬“x
 	const float kBulletSpeed = 0.5f;
 	Vector3 playerPos = player_->GetworldPosition();
-	Vector3 enemyPos=worldTransform_.translation_;
+	Vector3 enemyPos = worldTransform_.translation_;
 	Vector3 vector = { playerPos.x - enemyPos.x,playerPos.y - enemyPos.y,playerPos.z - enemyPos.z };
 	float len = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 	if (len != 0)
 	{
 		vector /= len;
 	}
-	vector*= kBulletSpeed;
+	vector *= kBulletSpeed;
 
 	vector = affine::MatVector(worldTransform_.matWorld_, vector);
 

@@ -1,7 +1,7 @@
 #include"RailCamera.h"
 #include"affine.h"
 #include<assert.h>
-void RailCamera::Initialize(Vector3 trans,Vector3 rot) {
+void RailCamera::Initialize(Vector3 trans, Vector3 rot) {
 
 	worldTransform_.Initialize();
 	//ワールドトランスフォームの初期設定
@@ -16,8 +16,8 @@ void RailCamera::Initialize(Vector3 trans,Vector3 rot) {
 }
 void RailCamera::Update() {
 	//プレイヤー旋回処理
-	Vector3 rot = {0,0,0};
-	Vector3 move = {0,0,0};
+	Vector3 rot = { 0,0,0 };
+	Vector3 move = { 0,0,0 };
 	if (input_->PushKey(DIK_Z))
 	{
 		move.z = 0.1;

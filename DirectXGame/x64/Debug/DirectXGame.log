@@ -1,2 +1,6 @@
-﻿  affine.cpp
-  DirectXGame.vcxproj -> C:\K021G1120\二年次\AL3\3D\DirectXGame\x64\Debug\DirectXGame.exe
+﻿  player.cpp
+C:\Users\hurst\Desktop\DirectXGame\player\player.cpp(52,57): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\hurst\Desktop\DirectXGame\player\player.cpp(53,57): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\hurst\Desktop\DirectXGame\player\player.cpp(74,16): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\hurst\Desktop\DirectXGame\player\player.cpp(78,17): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  DirectXGame.vcxproj -> C:\Users\hurst\Desktop\DirectXGame\x64\Debug\DirectXGame.exe
