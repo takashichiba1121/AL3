@@ -12,7 +12,7 @@ public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize(Vector3 translation,Vector3 rot);
+	void Initialize(Vector3 translation, Vector3 rot);
 	/// <summary>
 	/// XV
 	/// </summary>

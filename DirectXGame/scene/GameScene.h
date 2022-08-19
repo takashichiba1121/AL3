@@ -100,7 +100,7 @@ private: // メンバ変数
 	//弾
 	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
 
-	GameScene* gameScene_=nullptr;
+	GameScene* gameScene_ = nullptr;
 
 	std::stringstream enemyPopCommands;
 

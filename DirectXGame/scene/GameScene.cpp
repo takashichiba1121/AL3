@@ -4,8 +4,8 @@
 #include <cassert>
 #include<cmath>
 #include<random>
-#include"PLayer.h"
-#include"Enemy.h"
+#include"player.h"
+#include"enemy.h"
 #include<fstream>
 
 GameScene::GameScene() {}
@@ -32,12 +32,12 @@ void GameScene::Initialize(GameScene* gameScene) {
 	model_ = Model::Create();
 	TextureManager::Load("2D.png");
 	//自キャラの初期化
-	player_->Initialize(model_,textureHandle);
+	player_->Initialize(model_, textureHandle);
 
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
-	
-	railCamera_->Initialize( Vector3{0.0f,0.0f,-50.0f}, Vector3{0.0f,0.0f,0.0f});
+
+	railCamera_->Initialize(Vector3{ 0.0f,0.0f,-50.0f }, Vector3{ 0.0f,0.0f,0.0f });
 
 	player_->SetParent(railCamera_->GetWorldTransform());
 
@@ -56,7 +56,7 @@ void GameScene::Update() {
 		else { isDebugCameraActive_ = true; }
 	}
 #endif
-	if (isDebugCameraActive_){
+	if (isDebugCameraActive_) {
 		debugCamera_->Update();
 		viewProjection_ = debugCamera_->GetViewProjection();
 	}
@@ -175,8 +175,8 @@ void GameScene::CheckAllCollisions()
 		const float AR = 1;
 		const float BR = 1;
 
-		float A = pow((posB.x-posA.x),2) + pow((posB.y-posA.y),2) + pow((posB.z-posA.z),2);
-		float B = pow((AR + BR),2);
+		float A = pow((posB.x - posA.x), 2) + pow((posB.y - posA.y), 2) + pow((posB.z - posA.z), 2);
+		float B = pow((AR + BR), 2);
 
 		if (A <= B)
 		{
@@ -250,9 +250,9 @@ void GameScene::AddEnemyBullet(std::unique_ptr<EnemyBullet> enemyBullet) {
 void GameScene::Fire(Vector3 trans)
 {
 	assert(player_);
-	
-	std::unique_ptr<Enemy> enemy= std::make_unique<Enemy>();
-	enemy->Initialize(model_,trans);
+
+	std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>();
+	enemy->Initialize(model_, trans);
 	enemy->SetPlayer(player_);
 	enemy->SetGameScene(gameScene_);
 	enemy_.push_back(std::move(enemy));
@@ -261,13 +261,13 @@ void GameScene::LoadEnemyPopData() {
 	//ファイルを開く
 	std::ifstream file;
 	file.open("Resources/enemyPop.csv");
-		assert(file.is_open());
+	assert(file.is_open());
 
-		//ファイルの内容を文字列ストリームにコピー
-		enemyPopCommands << file.rdbuf();
+	//ファイルの内容を文字列ストリームにコピー
+	enemyPopCommands << file.rdbuf();
 
-		//ファイルを閉じる
-		file.close();
+	//ファイルを閉じる
+	file.close();
 }
 void GameScene::UpdateEnemyPopCommands() {
 
@@ -285,7 +285,7 @@ void GameScene::UpdateEnemyPopCommands() {
 	std::string line;
 
 	//コマンド実行ループ
-	while (getline(enemyPopCommands,line)){
+	while (getline(enemyPopCommands, line)) {
 		//1行分の文字列をストリームに変換して解析しやすくする
 		std::istringstream line_stream(line);
 
@@ -312,9 +312,9 @@ void GameScene::UpdateEnemyPopCommands() {
 			float z = (float)std::atof(word.c_str());
 
 			//敵を発生させる
-			Fire(Vector3(x,y,z));
+			Fire(Vector3(x, y, z));
 		}
-		else if (word.find("WAIT") == 0){
+		else if (word.find("WAIT") == 0) {
 			getline(line_stream, word, ',');
 
 			//待ち時間

@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <mutex>
 #include <set>
 #include <string>
 #include <unordered_map>
@@ -16,32 +17,12 @@ class Audio {
 	// サウンドデータの最大数
 	static const int kMaxSoundData = 256;
 
-	// チャンクヘッダ
-	struct ChunkHeader {
-		char id[4];   // チャンク毎のID
-		int32_t size; // チャンクサイズ
-	};
-
-	// RIFFヘッダチャンク
-	struct RiffHeader {
-		ChunkHeader chunk; // "RIFF"
-		char type[4];      // "WAVE"
-	};
-
-	// FMTチャンク
-	struct FormatChunk {
-		ChunkHeader chunk; // "fmt "
-		WAVEFORMATEX fmt;  // 波形フォーマット
-	};
-
 	// 音声データ
 	struct SoundData {
 		// 波形フォーマット
 		WAVEFORMATEX wfex;
-		// バッファの先頭アドレス
-		BYTE* pBuffer;
-		// バッファのサイズ
-		unsigned int bufferSize;
+		// バッファ
+		std::vector<uint8_t> buffer;
 		// 名前
 		std::string name_;
 	};
@@ -122,6 +103,18 @@ class Audio {
 	bool IsPlaying(uint32_t voiceHandle);
 
 	/// <summary>
+	/// 音声一時停止
+	/// </summary>
+	/// <param name="voiceHandle">再生ハンドル</param>
+	void PauseWave(uint32_t voiceHandle);
+
+	/// <summary>
+	/// 音声一時停止からの再開
+	/// </summary>
+	/// <param name="voiceHandle">再生ハンドル</param>
+	void ResumeWave(uint32_t voiceHandle);
+
+	/// <summary>
 	/// 音量設定
 	/// </summary>
 	/// <param name="voiceHandle">再生ハンドル</param>
@@ -150,4 +143,5 @@ class Audio {
 	uint32_t indexVoice_ = 0u;
 	// オーディオコールバック
 	XAudio2VoiceCallback voiceCallback_;
+	std::mutex voiceMutex_;
 };

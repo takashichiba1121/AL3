@@ -49,11 +49,11 @@
     <Filter Include="ヘッダー ファイル\math">
       <UniqueIdentifier>{647f4977-924a-4954-923f-5619e5afc9a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\player">
-      <UniqueIdentifier>{6cf3abd9-ca17-4e7c-bff3-0b197f055586}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\player">
-      <UniqueIdentifier>{865a10d4-d194-40a9-88d7-9c74ff93b048}</UniqueIdentifier>
+      <UniqueIdentifier>{182192ce-7b86-4845-b39d-f970894a5a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\player">
+      <UniqueIdentifier>{e7d5e948-682e-4817-8dcf-c4063850b7d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,23 +75,23 @@
     <ClCompile Include="affine.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="player\PlayerBullet.cpp">
-      <Filter>ソース ファイル\player</Filter>
-    </ClCompile>
-    <ClCompile Include="player\Player.cpp">
-      <Filter>ソース ファイル\player</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="RailCamera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="Skydome.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="RailCamera.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="player\player.cpp">
+      <Filter>ソース ファイル\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player\playerBullet.cpp">
+      <Filter>ソース ファイル\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,16 +174,10 @@
       <Filter>ヘッダー ファイル\3d</Filter>
     </ClInclude>
     <ClInclude Include="3d\PrimitiveDrawer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\3d</Filter>
     </ClInclude>
     <ClInclude Include="affine.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="player\PLayer.h">
-      <Filter>ヘッダー ファイル\player</Filter>
-    </ClInclude>
-    <ClInclude Include="player\PlayerBullet.h">
-      <Filter>ヘッダー ファイル\player</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>ヘッダー ファイル</Filter>
@@ -191,11 +185,17 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="RailCamera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="Skydome.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="RailCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="player\player.h">
+      <Filter>ヘッダー ファイル\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player\playerBullet.h">
+      <Filter>ヘッダー ファイル\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

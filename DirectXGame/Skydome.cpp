@@ -10,7 +10,7 @@ void Skydome::Initialize(Model* model) {
 
 	worldTransform_.Initialize();
 
-	worldTransform_.scale_ = {100.0f,100.0f,100.0f};
+	worldTransform_.scale_ = { 100.0f,100.0f,100.0f };
 	affine::makeMatIdentity(worldTransform_.matWorld_);
 	affine::makeMatScale(worldTransform_.matWorld_, worldTransform_.scale_);
 	worldTransform_.TransferMatrix();

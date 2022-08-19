@@ -92,6 +92,10 @@ LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 
 void WinApp::CreateGameWindow(
   const char* title, UINT windowStyle, int32_t clientWidth, int32_t clientHeight) {
+
+	// COM初期化
+	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+
 	windowStyle_ = windowStyle;
 	aspectRatio_ = float(clientWidth) / float(clientHeight);
 	// ウィンドウクラスの設定
@@ -132,6 +136,9 @@ void WinApp::CreateGameWindow(
 void WinApp::TerminateGameWindow() {
 	// ウィンドウクラスを登録解除
 	UnregisterClass(wndClass_.lpszClassName, wndClass_.hInstance);
+
+	// COM 終了
+	CoUninitialize();
 }
 
 bool WinApp::ProcessMessage() {
